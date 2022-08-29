@@ -1,3 +1,33 @@
+from sre_constants import CATEGORY
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
+CATEGORY = (
+    ('D900', 'D900'),
+    ('CS2100', 'CS2100'),
+    ('CS2200', 'CS2200'),
+)
+
+class Product(models.Model):
+    nome = models.CharField(max_length=100, blank=False, null=True)
+    codice = models.CharField(max_length=100, blank=False, unique=True, null=True)
+    category = models.CharField(max_length=10, choices = CATEGORY, null=True)
+    quantita = models.PositiveIntegerField(null=True)
+
+    class Meta:
+        verbose_name_plural = 'Prodotti'
+
+    def __str__(self):
+        return f'{self.nome}-{self.codice}-{self.category}-{self.quantita}'
+
+class Order(models.Model):
+    product = models.ForeignKey(Product, on_delete = models.CASCADE, null=True)
+    staff = models.ForeignKey(User, models.CASCADE, null=True)
+    order_quantity = models.PositiveBigIntegerField(null=True)
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'Prodotti scaricati'
+
+    def __str__(self):
+        return f'{self.product.nome}-{self.product.codice} scaricato da {self.staff.username}'
