@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
     'user.apps.UserConfig',
+    'crispy_forms',
+    'import_export',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +103,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
@@ -120,6 +123,14 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATIC_ROOT = (BASE_DIR/"asert/")
+
+MEDIA_ROOT = (BASE_DIR / 'media')
+
+MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'dashboard-index'
+
+LOGIN_URL = 'user-login'
 
 STATICFILES_DIRS = [
     BASE_DIR/ "static"
