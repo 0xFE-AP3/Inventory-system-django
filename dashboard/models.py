@@ -11,14 +11,14 @@ CATEGORY = (
 class Product(models.Model):
     nome = models.CharField(max_length=100, blank=False, null=True)
     codice = models.CharField(max_length=100, blank=False, unique=True, null=True)
-    category = models.CharField(max_length=10, choices = CATEGORY, null=True)
     quantita = models.PositiveIntegerField(null=True)
 
     class Meta:
         verbose_name_plural = 'Prodotti'
 
     def __str__(self):
-        return f'{self.nome}-{self.codice}-{self.category}-{self.quantita}'
+        return f'{self.nome}---{self.codice}---{self.quantita}'
+
 
 class Order(models.Model):
     product = models.ForeignKey(Product, on_delete = models.CASCADE, null=True)
@@ -27,7 +27,9 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        verbose_name_plural = 'Prodotti scaricati'
+        verbose_name_plural = 'Order'
+
+
 
     def __str__(self):
         return f'{self.product.nome}-{self.product.codice} scaricato da {self.staff.username}'

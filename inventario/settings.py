@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'crispy_forms',
     'import_export',
+    'sortable_listview',
+    'shapeshifter',
 ]
 
 MIDDLEWARE = [

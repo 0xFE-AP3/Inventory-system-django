@@ -3,6 +3,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+{% if user.is_authenticated %}
+
     <div class="container">
         <div class="row my-4">
             <div class="col-md-4">
@@ -10,13 +12,13 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header bg-info text-white">
-                        Profile Page
+                        Profilo
                     </div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <span class="h4"> Profile Information</span> <a class="btn btn-info btn-sm float-right"
-                                    href="">Edit</a>
+                                <span class="h4">Informazioni Profilo</span> <a class="btn btn-info btn-sm float-right"
+                                    href="{% url 'user-profile-update' %}">Modifica</a>
                                 <hr>
                                 <table class="table bg-white table-borderless">
                                     <tbody>
@@ -49,4 +51,29 @@
             </div>
         </div>
     </div>
+    {% else %}
+    
+    <div class="container">
+        <div class="row my-4">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        Profilo
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <span class="h4">Accedi per vedere il profilo</span> <a class="btn btn-info btn-sm float-right"
+                                    href="{% url 'user-login' %}">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
 {% endblock %}

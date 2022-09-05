@@ -2,6 +2,23 @@
 {% block title %} Login {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
+{% if user.is_authenticated %}
+
+
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="border p-3 bg-white">
+                    <h3>Login effettuato come {{ user.username }}</h3>
+                    <hr>
+                    <a class="nav-link text-black" href="{% url 'dashboard-index'%}">Dashboard<span
+                        class="sr-only">(current)</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% else %}
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-6 offset-md-3">
@@ -17,4 +34,5 @@
             </div>
         </div>
     </div>
+{% endif %}
 {% endblock %}

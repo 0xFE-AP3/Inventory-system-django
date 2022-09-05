@@ -1,0 +1,27 @@
+{% extends 'partials/base.html' %}
+{% block title %} Cancellazione elemento {% endblock %}
+
+{% block content %}
+
+<br>
+<div class="container">
+    <div class="row mt-6 offset-md-3">
+        <div class="col-md-6">
+            <div class="border bg-white p-3">
+                <h3>Scancella elemento </h3>
+                <hr>
+                <div class="alert alert-danger">
+                    <h4>Iet sicur ad vler scanzalr stal quel chi?</h4>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <a class="btn btn-secondary" href="{% url 'dashboard-product'%}"> Torna Indietro </a>
+                    <input class="btn btn-danger" type="submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -6,8 +6,7 @@ from import_export.admin import ImportExportModelAdmin
 admin.site.site_header = 'Arredo System Inventario Sezione Admin'
 
 class ProductAdmin(ImportExportModelAdmin):
-    list_display = ('nome', 'category', 'codice', 'quantita')
-    list_filter = ('category',)
+    list_display = ('nome', 'codice', 'quantita')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order)
