@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-j@i_j$dz9(3a_^%bbv$7u^_5k_(z__%vieb2@(hrakno@h4s6j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.10.101']
 
 
 # Application definition
@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     'user.apps.UserConfig',
     'crispy_forms',
     'import_export',
-    'sortable_listview',
-    'shapeshifter',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },

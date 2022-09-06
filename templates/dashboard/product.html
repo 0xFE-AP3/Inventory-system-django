@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %} product {% endblock %}
+{% block title %}Arredo System Inventario{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
 
@@ -7,6 +7,7 @@
     
     <div class="container">
         <div class="row my-4">
+
             <div class="col-md-4">
                 {% for message in messages %}
                 {% if message %}
@@ -15,37 +16,12 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-                <div class="border bg-white p-3">
-                    <h4>Aggiungi un pezzo nuovo</h4>
-                    <hr>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {{ form | crispy }}
-                        <!--<div class="form-group">
-                            <label for="exampleInputEmail1">Nome</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Codice</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Quantità</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
-                        </div>
-                        <div class="form-group ">
-                            <label for="inputState">Category</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                        </div>-->
-
-                        <input class="btn btn-success btn-block" type="submit" value="Add Product">
-
-                    </form>
+                <div class="card card-body">
+                    <form method="get">
+                    {{myFilter.form | crispy}}
+                    <button class="btn btn-primary" type="submit">Cerca</button>
                 </div>
+              
             </div>
             <div class="col-md-8">
                 <table class="table bg-white">
@@ -54,8 +30,10 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Codice</th>
                             <th scope="col">Quantità</th>
+                            {% if user.is_authenticated and user.is_staff and user.is_superuser %}
                             <th scope="col"></th>
                             <th scope="col"></th>
+                            {% endif %}
                         </tr>
                     </thead>
                     <tbody>
@@ -64,8 +42,10 @@
                             <td>{{ item.nome }}</td>
                             <td>{{ item.codice }}</td>
                             <td>{{ item.quantita }}</td>
+                            {% if user.is_authenticated and user.is_staff and user.is_superuser %}
                             <td><a class="btn btn-info btn-sm" href="{% url 'dashboard-product-update' item.id %}">Edit</a></td>
                             <td><a class="btn btn-danger btn-sm" href="{% url 'dashboard-product-delete' item.id %}">Delete</a></td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>

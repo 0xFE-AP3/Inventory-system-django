@@ -6,6 +6,8 @@ from .models import Product, Order
 from .forms import ProductForm, OrderForm
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .filters import ProductFilter
+
 
 @login_required
 def index(request):
@@ -45,6 +47,9 @@ def product(request):
     items = Product.objects.all() #ORM
     #items = Product.objects.raw('SELECT * FROM dashboard_product')
 
+    myFilter = ProductFilter(request.GET, queryset=items)
+    items = myFilter.qs
+
     if request.method == 'POST':
         form = ProductForm(request.POST)
         if form.is_valid():
@@ -57,6 +62,7 @@ def product(request):
     context = {
         'items': items,
         'form': form,
+        'myFilter': myFilter,
     }
     return render(request, 'dashboard/product.html', context)
 
