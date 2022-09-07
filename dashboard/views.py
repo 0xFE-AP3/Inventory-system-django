@@ -12,6 +12,7 @@ from .filters import ProductFilter
 @login_required
 def index(request):
     orders = Order.objects.all()
+    items = Product.objects.get
     if request.method=='POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -68,6 +69,7 @@ def product(request):
 
 def product_delete(request, pk):
     item = Product.objects.get(id=pk)
+    form = OrderForm(request.POST)
     if request.method == 'POST':
         item.delete()
         return redirect('dashboard-product')
@@ -75,9 +77,11 @@ def product_delete(request, pk):
 
 def product_update(request, pk):
     item = Product.objects.get(id=pk)
+    
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=item)
         if form.is_valid():
+            item.quantita = form.fields()
             form.save()
             return redirect('dashboard-product')
     else:
@@ -86,6 +90,7 @@ def product_update(request, pk):
         'form':form,
     }
     return render(request, 'dashboard/product_update.html', context)
+
 
 @login_required
 def order(request):
