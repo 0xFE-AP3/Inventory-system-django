@@ -19,14 +19,14 @@ def index(request):
             instance = form.save(commit=False)
             instance.staff = request.user
             instance.save()
-            return redirect('dashboard-index')
+            return redirect('dashboard-product')
     else:
         form = OrderForm()
     context = {
         'orders' : orders,
         'form' : form,
     }
-    return render(request, 'dashboard/index.html', context)
+    return render(request, 'dashboard/profile.html', context)
 
 @login_required
 def staff(request):
@@ -79,13 +79,17 @@ def product_update(request, pk):
     item = Product.objects.get(id=pk)
     
     if request.method == 'POST':
-        form = ProductForm(request.POST, instance=item)
+        form = OrderForm(request.POST, instance=item)
         if form.is_valid():
-            item.quantita = form.fields()
+            quantity = form.cleaned_data['order_quantity']
+            if item.quantita !=0:
+                item.quantita -= quantity
+            else:
+                return redirect('dashboard-order')
             form.save()
             return redirect('dashboard-product')
     else:
-        form = ProductForm(instance=item)
+        form = OrderForm(instance=item)
     context = {
         'form':form,
     }

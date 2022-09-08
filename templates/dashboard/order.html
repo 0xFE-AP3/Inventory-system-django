@@ -1,42 +1,17 @@
 {% extends 'partials/base.html' %}
-{% block title %}Arredo System Inventario{% endblock %}
-
+{% block title %} Login {% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
-
-{% include 'partials/topnav.html' %}
-
-<div class="container">
-    <div class="row my-4">
-        <div class="col-md-4">
-
-        </div>
-        <div class="col-md-8">
-            <table class="table bg-white">
-                <thead class="bg-info">
-                    <tr class="text-white">
-                        <th scope="col">Prodotto</th>
-                        <th scope="col">Scaricato da</th>
-                        <th scope="col">Quantità</th>
-                        <th scope="col">Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for orders in orders %}
-                    <tr>
-                        <td>{{orders.product}}</td>
-                        <td>{{orders.staff.username}}</td>
-                        <td>{{orders.order_quantity}}</td>
-                        <td>{{orders.date}}</td>
-                    </tr>
-                    {% endfor %}
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-6 offset-md-3">
+                <div class="border p-3 bg-white">
+                    <h3>quantità non disponibile</h3>
+                    <hr>
+                    <a class="nav-link text-black" href="{% url 'dashboard-product'%}">Dashboard<span
+                        class="sr-only">(current)</span></a>
+                </div>
+            </div>
         </div>
     </div>
-
-</div>
-
-
-
 {% endblock %}

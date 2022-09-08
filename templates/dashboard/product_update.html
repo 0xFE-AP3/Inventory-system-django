@@ -1,5 +1,5 @@
 {% extends 'partials/base.html' %}
-{% block title %} Modifica elemento {% endblock %}
+{% block title %} Scarico pezzo {% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
 
@@ -8,7 +8,7 @@
     <div class="row mt-6 offset-md-3">
         <div class="col-md-6">
             <div class="border bg-white p-3">
-                <h3> Modifica elemento </h3>
+                <h3> Scarico pezzo </h3>
                 <hr>
                 <form method="POST">
                     {% csrf_token %}

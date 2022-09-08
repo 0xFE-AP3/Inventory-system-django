@@ -9,5 +9,4 @@ class ProductAdmin(ImportExportModelAdmin):
     list_display = ('nome', 'codice', 'quantita')
 
 admin.site.register(Product, ProductAdmin)
-admin.site.register(Order)
 admin.site.unregister(Group)
