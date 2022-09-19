@@ -82,7 +82,7 @@ def product_update(request, pk):
         form = OrderForm(request.POST, instance=item)
         if form.is_valid():
             quantity = form.cleaned_data['order_quantity']
-            if item.quantita !=0:
+            if item.quantita >= quantity:
                 item.quantita -= quantity
             else:
                 return redirect('dashboard-order')
