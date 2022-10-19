@@ -1,6 +1,6 @@
 {% extends 'partials/base.html' %}
-{% block title %} Cancellazione elemento {% endblock %}
-
+{% block title %} Carico pezzo {% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <br>
@@ -8,14 +8,12 @@
     <div class="row mt-6 offset-md-3">
         <div class="col-md-6">
             <div class="border bg-white p-3">
-                <h3>Scancella elemento </h3>
+                <h3> Carico pezzo </h3>
                 <hr>
-                <div class="alert alert-danger">
-                    <h4>Iet sicur ad vler scanzalr stal quel chi?</h4>
-                </div>
+                <h5> Digitare '0' per segnalare il ricambio come ordinato </h5>
                 <form method="POST">
                     {% csrf_token %}
-                    {{ form }}
+                    {{ form | crispy}}
                     <a class="btn btn-secondary" href="{% url 'dashboard-product'%}"> Torna Indietro </a>
                     <input class="btn btn-danger" type="submit">
                 </form>
